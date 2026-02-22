@@ -33,6 +33,10 @@ describe('loadContentData', () => {
     expect(data.budgetNarratives.categories).toBeDefined();
     expect(data.actionResources.levels.length).toBeGreaterThan(0);
     expect(data.civicPlatforms.platforms.length).toBeGreaterThan(0);
+    expect(data.oecdTimeseries).toBeDefined();
+    expect(data.oecdTimeseries.taxToGDP).toBeInstanceOf(Array);
+    expect(data.oecdComparison).toBeDefined();
+    expect(data.oecdComparison.governmentEfficiency).toBeDefined();
   });
 
   it('throws for unsupported year', () => {

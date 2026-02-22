@@ -12,4 +12,6 @@ export type { ArnonaRatesData } from './schemas/arnona-rates.schema';
 export type { BudgetNarrativesData } from './schemas/budget-narratives.schema';
 export type { ActionResourcesData } from './schemas/action-resources.schema';
 export type { CivicPlatformsData } from './schemas/civic-platforms.schema';
+export type { OecdTimeseriesData } from './schemas/oecd-timeseries.schema';
+export type { OecdComparisonData } from './schemas/oecd-comparison.schema';
 export type { TaxDataBundle, ContentDataBundle } from './loader';

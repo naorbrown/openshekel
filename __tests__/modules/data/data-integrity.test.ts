@@ -94,3 +94,33 @@ describe('arnona city ID uniqueness', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 });
+
+describe('oecd-timeseries.json integrity', () => {
+  it('taxToGDP entries have ascending years', () => {
+    const points = content.oecdTimeseries.taxToGDP;
+    for (let i = 1; i < points.length; i++) {
+      expect(points[i].year).toBeGreaterThan(points[i - 1].year);
+    }
+  });
+
+  it('taxToGDP values are non-negative', () => {
+    for (const point of content.oecdTimeseries.taxToGDP) {
+      expect(point.israel).toBeGreaterThanOrEqual(0);
+      expect(point.oecdAverage).toBeGreaterThanOrEqual(0);
+    }
+  });
+});
+
+describe('oecd-comparison.json integrity', () => {
+  it('governance efficiency scores are within valid range or null', () => {
+    const { israel, oecdAverage } = content.oecdComparison.governmentEfficiency;
+    if (israel !== null) {
+      expect(israel).toBeGreaterThanOrEqual(0);
+      expect(israel).toBeLessThanOrEqual(100);
+    }
+    if (oecdAverage !== null) {
+      expect(oecdAverage).toBeGreaterThanOrEqual(0);
+      expect(oecdAverage).toBeLessThanOrEqual(100);
+    }
+  });
+});

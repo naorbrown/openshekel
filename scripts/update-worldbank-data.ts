@@ -1,6 +1,6 @@
 /**
  * Fetches latest World Bank governance data and updates
- * the static fallback file at src/lib/data/oecd-comparison.json.
+ * the static file at src/modules/data/sources/oecd-comparison.json.
  *
  * Run: pnpm tsx scripts/update-worldbank-data.ts
  */
@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const DATA_PATH = resolve(__dirname, '../src/lib/data/oecd-comparison.json');
+const DATA_PATH = resolve(__dirname, '../src/modules/data/sources/oecd-comparison.json');
 
 async function fetchGovernanceEffectiveness(): Promise<number | null> {
   try {
@@ -63,7 +63,7 @@ async function main() {
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(updated, null, 2) + '\n');
-  console.log('Updated src/lib/data/oecd-comparison.json');
+  console.log('Updated src/modules/data/sources/oecd-comparison.json');
 }
 
 main();

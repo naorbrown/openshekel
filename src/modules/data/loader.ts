@@ -9,6 +9,8 @@ import { CostAnalysisSchema, type CostAnalysisData } from './schemas/cost-analys
 import { BudgetNarrativesSchema, type BudgetNarrativesData } from './schemas/budget-narratives.schema';
 import { ActionResourcesSchema, type ActionResourcesData } from './schemas/action-resources.schema';
 import { CivicPlatformsSchema, type CivicPlatformsData } from './schemas/civic-platforms.schema';
+import { OecdTimeseriesSchema, type OecdTimeseriesData } from './schemas/oecd-timeseries.schema';
+import { OecdComparisonSchema, type OecdComparisonData } from './schemas/oecd-comparison.schema';
 
 // JSON imports — this is the ONLY file in the codebase that imports JSON directly
 import taxRates2025 from './sources/tax-rates-2025.json';
@@ -21,6 +23,8 @@ import costAnalysis from './sources/cost-analysis.json';
 import budgetNarratives from './sources/budget-narratives.json';
 import actionResources from './sources/action-resources.json';
 import civicPlatforms from './sources/civic-platforms.json';
+import oecdTimeseries from './sources/oecd-timeseries.json';
+import oecdComparison from './sources/oecd-comparison.json';
 
 /**
  * Parse data through a Zod schema. Throws on invalid data with a descriptive error.
@@ -60,6 +64,8 @@ export interface ContentDataBundle {
   budgetNarratives: BudgetNarrativesData;
   actionResources: ActionResourcesData;
   civicPlatforms: CivicPlatformsData;
+  oecdTimeseries: OecdTimeseriesData;
+  oecdComparison: OecdComparisonData;
 }
 
 // Caches — validated once, reused forever
@@ -102,6 +108,8 @@ export function loadContentData(year: number): ContentDataBundle {
       budgetNarratives: loadAndValidate(BudgetNarrativesSchema, budgetNarratives, 'budget-narratives'),
       actionResources: loadAndValidate(ActionResourcesSchema, actionResources, 'action-resources'),
       civicPlatforms: loadAndValidate(CivicPlatformsSchema, civicPlatforms, 'civic-platforms'),
+      oecdTimeseries: loadAndValidate(OecdTimeseriesSchema, oecdTimeseries, 'oecd-timeseries'),
+      oecdComparison: loadAndValidate(OecdComparisonSchema, oecdComparison, 'oecd-comparison'),
     };
     contentBundles.set(year, bundle);
     return bundle;

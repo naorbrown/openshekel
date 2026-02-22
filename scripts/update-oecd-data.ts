@@ -1,6 +1,6 @@
 /**
  * Fetches latest OECD tax-to-GDP time-series data and updates
- * the static fallback file at src/lib/data/oecd-timeseries.json.
+ * the static file at src/modules/data/sources/oecd-timeseries.json.
  *
  * Run: pnpm tsx scripts/update-oecd-data.ts
  */
@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const DATA_PATH = resolve(__dirname, '../src/lib/data/oecd-timeseries.json');
+const DATA_PATH = resolve(__dirname, '../src/modules/data/sources/oecd-timeseries.json');
 
 interface TimeSeriesDataPoint {
   year: number;
@@ -94,7 +94,6 @@ async function main() {
 
   console.log(`Fetched ${taxToGDP.length} data points for tax-to-GDP.`);
 
-  // Read existing file to preserve other series
   const existing = JSON.parse(readFileSync(DATA_PATH, 'utf-8'));
 
   const updated = {
@@ -104,7 +103,7 @@ async function main() {
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(updated, null, 2) + '\n');
-  console.log('Updated src/lib/data/oecd-timeseries.json');
+  console.log('Updated src/modules/data/sources/oecd-timeseries.json');
 }
 
 main();
